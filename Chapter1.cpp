@@ -7,15 +7,41 @@ using namespace cv;
 
 
 
-void  main() {
+//void  main() {
 
 
 
 	// images processing importing 
-	string path = "Resources/test.png";
-	Mat img = imread(path);
+	//string path = "Resources/test.png";
+	//Mat img = imread(path);
+	//imshow("Image", img);
+	//waitKey(0);	// to hold the image until we press a key
+
 
 
 
 	
+//}
+
+
+void  main() {
+
+
+
+	// video processing importing 
+	string path = "Resources/test_video.mp4";
+	VideoCapture cap(path);	
+	Mat img;
+
+	while (true) {
+		cap.read(img);
+	
+	
+	imshow("Image", img);
+	waitKey(20);	
+}
+
+
+
+
 }
