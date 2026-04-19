@@ -11,7 +11,8 @@ using namespace cv;
 
 
 
-	// images processing importing 
+	// images processing importing
+	
 	//string path = "Resources/test.png";
 	//Mat img = imread(path);
 	//imshow("Image", img);
@@ -24,24 +25,48 @@ using namespace cv;
 //}
 
 
-void  main() {
+//void  main() {
 
 
 
 	// video processing importing 
-	string path = "Resources/test_video.mp4";
-	VideoCapture cap(path);	
-	Mat img;
+	//string path = "Resources/test_video.mp4";
+	//VideoCapture cap(path);	
+	//Mat img;
 
-	while (true) {
-		cap.read(img);
+	//while (true) {
+		//cap.read(img);
 	
 	
-	imshow("Image", img);
-	waitKey(20);	
-}
+	//imshow("Image", img);
+	//waitKey(20);	
+//}
 
 
 
 
-}
+//}
+
+
+// webcam
+
+//void  main() {
+
+
+	// zero for laptop  
+	
+	//VideoCapture cap(0);
+	//Mat img;
+
+	//while (true) {
+		//cap.read(img);
+
+
+		//imshow("Image", img);
+		//waitKey(20);
+	//}
+
+
+
+
+//}
