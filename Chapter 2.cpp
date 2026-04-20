@@ -21,8 +21,22 @@ void  main() {
 
 	Mat img = imread(path);
 	Mat imgGray;
-	imshow("Image", img);
+	Mat imgBlur;
+	Mat imgCanny;
 	cvtColor(img, imgGray, COLOR_BGR2GRAY);
+
+
+
+	GaussianBlur(imgGray, imgBlur, Size(7, 7), 5, 0);
+	Canny(imgBlur, imgCanny, 50, 150);  // egde detector 
+
+
+	imshow("Image", img);
+
+	imshow("Image Gray", imgGray);
+	imshow("Image Blur", imgBlur);  // blurrr effects
+	imshow("Image Canny", imgCanny);  // edge detection
+
 	waitKey(0);	// to hold the image until we press a key
 
 
