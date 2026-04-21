@@ -23,19 +23,27 @@ void  main() {
 	Mat imgGray;
 	Mat imgBlur;
 	Mat imgCanny;
+	Mat imgDil;
+	Mat imgErode;
 	cvtColor(img, imgGray, COLOR_BGR2GRAY);
 
 
 
 	GaussianBlur(imgGray, imgBlur, Size(7, 7), 5, 0);
-	Canny(imgBlur, imgCanny, 50, 150);  // egde detector 
+	Canny(imgBlur, imgCanny, 25, 75);  // egde detector
+	Mat kernel = getStructuringElement(MORPH_RECT, Size(5, 5));
+
+	dilate(imgCanny, imgDil, kernel);
+	erode(imgDil, imgErode, kernel);
 
 
 	imshow("Image", img);
 
 	imshow("Image Gray", imgGray);
 	imshow("Image Blur", imgBlur);  // blurrr effects
-	imshow("Image Canny", imgCanny);  // edge detection
+	imshow("Image Canny", imgCanny); // edge detection
+	imshow("Image Dilation", imgDil);
+	imshow("Image Erode", imgErode);
 
 	waitKey(0);	// to hold the image until we press a key
 
