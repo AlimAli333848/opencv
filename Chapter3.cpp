@@ -10,11 +10,15 @@ void  main() {
 
 	string path = "Resources/test.png";
 	Mat img = imread(path);
+	Mat imResize;
 
-	resize (img, );
 
+	//cout << img.size()<<endl; // find the image size 
+
+	resize (img,imResize,Size(640,480)); // rezise func
 
 	imshow("Images", img);
+	imshow("REsize ", imResize);
 
 	waitKey(0);
 }
