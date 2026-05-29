@@ -26,6 +26,17 @@ void  main() {
 	warpPerspective(img, imgWarp, matrix, Point(w, h));
 
 
+	// circle pooint
+	for (int i = 0; i < 4; i++) {
+		circle(img, src[i], 10, Scalar(0, 0, 255), FILLED);
+		
+	}
+	
+
+
+
+
+
 
 
 
