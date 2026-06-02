@@ -138,6 +138,8 @@
     <ClCompile Include="Chapter3.cpp" />
     <ClCompile Include="Chapter4.cpp" />
     <ClCompile Include="Chapter5.cpp" />
+    <ClCompile Include="ColorPicker.cpp" />
+    <ClCompile Include="Virtual Painter.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
