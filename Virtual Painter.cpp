@@ -4,13 +4,51 @@
 #include<iostream>
 using namespace std;
 using namespace cv;
+
+Mat img;
+
+
+
+
 vector<vector<int>> mycolors{
 
 	{124,48,117,143,170,255},{68,72,156,102,126,255} };   //purple //green 
 
 
-	vector<Scalar>myColorValues{  {255,0,255},{0,255,0}}; //purple // green
+vector<Scalar>myColorValues{ {255,0,255},{0,255,0} }; //purple // green
 
+
+
+void getContours(Mat imgDil) {
+
+	vector<vector<Point>> contours;
+	vector<Vec4i> hierarchy;
+
+	findContours(imgDil, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
+	//drawContours(img, contours, -1, Scalar(255, 0, 255), 2);
+
+	vector<vector<Point>> conPoly(contours.size());
+	vector<Rect> boundRect(contours.size());
+
+	for (int i = 0; i < contours.size(); i++)
+	{
+		int area = contourArea(contours[i]);
+		cout << area << endl;
+		string objectType;
+
+		if (area > 1000)
+		{
+			float peri = arcLength(contours[i], true);
+			approxPolyDP(contours[i], conPoly[i], 0.02 * peri, true);
+			cout << conPoly[i].size() << endl;
+			boundRect[i] = boundingRect(conPoly[i]);
+
+			
+			drawContours(img, conPoly, i, Scalar(255, 0, 255), 2);
+			
+		}
+	}
+}
 
 
 
@@ -31,6 +69,7 @@ void findcolor(Mat img) {
 		Mat mask;
 		inRange(imgHSV, lower, upper, mask);
 		imshow(to_string(i), mask);
+		getContours(mask);
 	}
 
 }
@@ -43,7 +82,7 @@ void  main() {
 	// zero for laptop  
 
 	VideoCapture cap(0);
-	Mat img;
+	
 
 	while (true) {
 		cap.read(img);
