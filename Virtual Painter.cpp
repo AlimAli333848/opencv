@@ -45,6 +45,7 @@ void getContours(Mat imgDil) {
 
 			
 			drawContours(img, conPoly, i, Scalar(255, 0, 255), 2);
+			rectangle(img, boundRect[i].tl(), boundRect[i].br(), Scalar(0, 255, 0), 5);
 			
 		}
 	}
