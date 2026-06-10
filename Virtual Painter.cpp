@@ -19,7 +19,7 @@ vector<Scalar>myColorValues{ {255,0,255},{0,255,0} }; //purple // green
 
 
 
-void getContours(Mat imgDil) {
+   Point getContours(Mat imgDil) {
 
 	vector<vector<Point>> contours;
 	vector<Vec4i> hierarchy;
@@ -29,6 +29,7 @@ void getContours(Mat imgDil) {
 
 	vector<vector<Point>> conPoly(contours.size());
 	vector<Rect> boundRect(contours.size());
+	Point myPoint(0, 0);
 
 	for (int i = 0; i < contours.size(); i++)
 	{
@@ -43,12 +44,17 @@ void getContours(Mat imgDil) {
 			cout << conPoly[i].size() << endl;
 			boundRect[i] = boundingRect(conPoly[i]);
 
+			myPoint.x = boundRect[i].x + boundRect[i].width / 2;
+			myPoint.y = boundRect[i].y;
+			
+
 			
 			drawContours(img, conPoly, i, Scalar(255, 0, 255), 2);
 			rectangle(img, boundRect[i].tl(), boundRect[i].br(), Scalar(0, 255, 0), 5);
 			
 		}
 	}
+	return myPoint;
 }
 
 
@@ -70,7 +76,7 @@ void findcolor(Mat img) {
 		Mat mask;
 		inRange(imgHSV, lower, upper, mask);
 		imshow(to_string(i), mask);
-		getContours(mask);
+		Point myPoint = getContours(mask);
 	}
 
 }
