@@ -6,6 +6,7 @@ using namespace std;
 using namespace cv;
 
 Mat img;
+vector<vector<int>>newPoints;          // y is centre // third is the colour 
 
 
 
@@ -62,24 +63,34 @@ vector<Scalar>myColorValues{ {255,0,255},{0,255,0} }; //purple // green
 
 
 
-void findcolor(Mat img) {
-	Mat imgHSV;
+   void findcolor(Mat img) {
+	   Mat imgHSV;
 
 
-	cvtColor(img, imgHSV, COLOR_BGR2HSV);
-	for (int i = 0; i < mycolors.size(); i++) {
+	   cvtColor(img, imgHSV, COLOR_BGR2HSV);
+	   for (int i = 0; i < mycolors.size(); i++) {
 
 
 
-		Scalar lower(mycolors[i][0], mycolors[i][1],mycolors[i][2]);
-		Scalar upper(mycolors[i][3], mycolors[i][4],mycolors[i][5]);
-		Mat mask;
-		inRange(imgHSV, lower, upper, mask);
-		imshow(to_string(i), mask);
-		Point myPoint = getContours(mask);
-	}
+		   Scalar lower(mycolors[i][0], mycolors[i][1], mycolors[i][2]);         // zero is purple  one is the green 
+		   Scalar upper(mycolors[i][3], mycolors[i][4], mycolors[i][5]);
+		   Mat mask;
+		   inRange(imgHSV, lower, upper, mask);
+		   imshow(to_string(i), mask);
+		   Point myPoint = getContours(mask);
+		   if (myPoint.x != 0 && myPoint.y != 0) {
+			   newPoints.push_back({ myPoint.x,myPoint.y,i });    //i is the colour 
+		   }
 
-}
+	   }
+   }
+
+   void DrawsCanvas(vector<vector<int>>newPoints, vector<vector<int>> mycolors) {
+
+	   for (int i = 0; i < newPoints.size(); i++) {
+		   circle(img, Point(newPoints[i][0]), Point(newPoints[i][1]))
+
+   }
 
 // webcam
 
