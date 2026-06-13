@@ -63,7 +63,7 @@ vector<Scalar>myColorValues{ {255,0,255},{0,255,0} }; //purple // green
 
 
 
-   void findcolor(Mat img) {
+   vector<vector<int>>findcolor(Mat img) {
 	   Mat imgHSV;
 
 
@@ -83,35 +83,38 @@ vector<Scalar>myColorValues{ {255,0,255},{0,255,0} }; //purple // green
 		   }
 
 	   }
+	   return newPoints;
    }
 
-   void DrawsCanvas(vector<vector<int>>newPoints, vector<vector<int>> mycolors) {
+   void DrawsCanvas(vector<vector<int>>newPoints, vector<Scalar>myColorValues) {
 
 	   for (int i = 0; i < newPoints.size(); i++) {
-		   circle(img, Point(newPoints[i][0]), Point(newPoints[i][1]))
+		   circle(img, (Point(newPoints[i][0]), Point(newPoints[i][1])), 10, myColorValues[newPoints[i][2]], FILLED);
 
+	   }
    }
 
-// webcam
+	   // webcam
 
-void  main() {
-
-
-	// zero for laptop  
-
-	VideoCapture cap(0);
-	
-
-	while (true) {
-		cap.read(img);
-		findcolor(img);
+	   void  main() {
 
 
-		imshow("Image", img);
-		waitKey(1);
-	}
+		   // zero for laptop  
+
+		   VideoCapture cap(0);
+
+
+		   while (true) {
+			   cap.read(img);
+			   newPoints=findcolor(img);
+			   DrawsCanvas(newPoints,myColorValues);
+
+
+			   imshow("Image", img);
+			   waitKey(1);
+		   }
 
 
 
 
-}
+	   }
