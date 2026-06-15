@@ -89,7 +89,7 @@ vector<Scalar>myColorValues{ {255,0,255},{0,255,0} }; //purple // green
    void DrawsCanvas(vector<vector<int>>newPoints, vector<Scalar>myColorValues) {
 
 	   for (int i = 0; i < newPoints.size(); i++) {
-		   circle(img, (Point(newPoints[i][0]), Point(newPoints[i][1])), 10, myColorValues[newPoints[i][2]], FILLED);
+		   circle(img, Point(newPoints[i][0], newPoints[i][1]), 10, myColorValues[newPoints[i][2]], FILLED);
 
 	   }
    }
