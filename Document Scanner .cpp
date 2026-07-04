@@ -30,17 +30,20 @@ Mat preProcessing(Mat img)
 
 }
 
-Point getContours(Mat imgDil) {
+vector <Point> getContours(Mat image) {
 	
 		vector<vector<Point>> contours;
 		vector<Vec4i> hierarchy;
 	
-		findContours(imgDil, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
-		drawContours(img, contours, -1, Scalar(255, 0, 255), 2);
+		findContours(imgDil, image, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
+		//drawContours(img, contours, -1, Scalar(255, 0, 255), 2);
 	
 		vector<vector<Point>> conPoly(contours.size());
 		vector<Rect> boundRect(contours.size());
-		Point myPoint(0, 0);
+
+
+		vector<Point> biggest;
+		int maxArea;
 	
 		for (int i = 0; i < contours.size(); i++)
 		{
@@ -52,6 +55,14 @@ Point getContours(Mat imgDil) {
 			{
 				float peri = arcLength(contours[i], true);
 				approxPolyDP(contours[i], conPoly[i], 0.02 * peri, true);
+
+				if (area > maxArea && contPloy[i].size()==4) {
+
+					maxArea = area;
+
+				}
+
+
 				
 	
 				
@@ -60,7 +71,7 @@ Point getContours(Mat imgDil) {
 				
 			}
 		}
-		return myPoint;
+		return biggest;
 	}
 	//
 
