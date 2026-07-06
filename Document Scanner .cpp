@@ -7,6 +7,7 @@ using namespace cv;
 
 Mat imgOrginal, imgGray, imgCanny, imgThre;
 Mat  imgErode, imgDil, imgBlur;
+vector<Point> intialPoints;
 
 
 Mat preProcessing(Mat img)
@@ -56,7 +57,8 @@ vector <Point> getContours(Mat image) {
 				float peri = arcLength(contours[i], true);
 				approxPolyDP(contours[i], conPoly[i], 0.02 * peri, true);
 
-				if (area > maxArea && contPloy[i].size()==4) {
+				if (area > maxArea && conPoly[i].size()==4) {
+					biggest = { conPoly[i][0],conPoly[i][1],conPoly[i][2],conPoly[i][3] };
 
 					maxArea = area;
 
@@ -75,6 +77,10 @@ vector <Point> getContours(Mat image) {
 	}
 	//
 
+void 
+
+
+
 
 void  main() {
 
@@ -92,7 +98,7 @@ void  main() {
 	imgThre = preProcessing(imgorginal);
 	
 
-	getContours(imgThre);
+	 intialPoints =getContours(imgThre);
 
 
 
