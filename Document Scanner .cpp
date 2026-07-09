@@ -77,7 +77,19 @@ vector <Point> getContours(Mat image) {
 	}
 	//
 
-void 
+void drawPoints(vector<Point>points, Scalar color) {
+	for (int i = 0; i <= points.size(); i++) {
+
+		circle(imgOrginal, points[i], 30, color, FILLED);
+
+
+		putText(imgOrginal, to_string(i), points[i], FONT_HERSHEY_PLAIN, 5, color, 5);
+
+
+	}
+
+
+}
 
 
 
@@ -99,6 +111,8 @@ void  main() {
 	
 
 	 intialPoints =getContours(imgThre);
+
+	 drawPoints(intialPoints, Scalar(0, 0, 255));
 
 
 
